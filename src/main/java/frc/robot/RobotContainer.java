@@ -26,7 +26,7 @@ public class RobotContainer {
   private final drivetrain drivetrain; 
 
     private double modifyJoystick(double in) {
-    if (Math.abs(in) < 0.4){
+    if (Math.abs(in) < 0.1){
       return 0; 
     }
     return in * in * Math.signum(in);

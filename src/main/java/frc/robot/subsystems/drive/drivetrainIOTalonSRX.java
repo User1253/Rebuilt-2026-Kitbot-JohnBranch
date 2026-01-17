@@ -18,6 +18,8 @@ public class drivetrainIOTalonSRX implements drivetrainIO{
 
    public void setVoltages(double left, double right) {
       leftFrontTalon.set(ControlMode.PercentOutput, left);
+      leftBackTalon.set(ControlMode.PercentOutput, -left);
+      rightBackTalon.set(ControlMode.PercentOutput, -right);
       rightFrontTalon.set(ControlMode.PercentOutput, right);
    }
 
@@ -27,17 +29,14 @@ public class drivetrainIOTalonSRX implements drivetrainIO{
       rightBackTalon = new TalonSRX(DrivetrainConstants.rightBackTalonID); 
       rightFrontTalon = new TalonSRX(DrivetrainConstants.rightFrontTalonID); 
 
-      leftBackTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
-      leftFrontTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
-      rightBackTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
-      rightFrontTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
-
-      leftBackTalon.follow(leftFrontTalon); 
-      rightBackTalon.follow(rightFrontTalon); 
+      leftBackTalon.configContinuousCurrentLimit(DrivetrainConstants.currentLimit);
+      leftFrontTalon.configContinuousCurrentLimit(DrivetrainConstants.currentLimit);
+      rightBackTalon.configContinuousCurrentLimit(DrivetrainConstants.currentLimit);
+      rightFrontTalon.configContinuousCurrentLimit(DrivetrainConstants.currentLimit);
 
       leftFrontTalon.setInverted(false);
-      leftBackTalon.setInverted(false);
-      rightFrontTalon.setInverted(true);
+      leftBackTalon.setInverted(true);
+      rightFrontTalon.setInverted(false);
       rightBackTalon.setInverted(true);
    }
 

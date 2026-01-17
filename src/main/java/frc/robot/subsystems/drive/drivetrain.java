@@ -6,7 +6,7 @@ package frc.robot.subsystems.drive;
 
 import java.util.function.DoubleSupplier;
 
-
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -21,8 +21,8 @@ public class drivetrain extends SubsystemBase {
 
   public Command setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
     return this.run(() -> {
-      //var speeds = DifferentialDrive.arcadeDriveIK(drive.getAsDouble(), steer.getAsDouble(), false);
-      this.drivetrain.setVoltages(12 * (drive.getAsDouble() - steer.getAsDouble()), 12 * (drive.getAsDouble() + steer.getAsDouble()));
+      var speeds = DifferentialDrive.arcadeDriveIK(drive.getAsDouble(), steer.getAsDouble(), false);
+      this.drivetrain.setVoltages(12 * (speeds.left), 12 * (-speeds.right));
     });
   }
   /** Creates a new drivetrain. */

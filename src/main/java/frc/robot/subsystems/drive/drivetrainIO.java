@@ -7,6 +7,4 @@ package frc.robot.subsystems.drive;
 /** Add your docs here. */
 public interface drivetrainIO {
     public void setVoltages(double left, double right); 
-
-    
 } 

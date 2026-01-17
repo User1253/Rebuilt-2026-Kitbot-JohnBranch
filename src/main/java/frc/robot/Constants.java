@@ -28,6 +28,6 @@ public final class Constants {
     public static final int rightFrontTalonID = 2; 
     public static final int rightBackTalonID = 4; 
 
-    public static final int currentLimit = 8;
+    public static final int currentLimit = 60;
   }
 }
