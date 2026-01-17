@@ -11,17 +11,15 @@ import frc.robot.subsystems.index.Index;
 import frc.robot.subsystems.tower.TowerSparkMax;
 import frc.robot.subsystems.tower.TowerSubsystem;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
   private final CommandXboxController controller = new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  // private final TowerSubsystem towerSubsystem;
+  private final TowerSubsystem towerSubsystem;
   
-  // private final Index index;
+  private final Index index;
 
   private final drivetrain drivetrain; 
 
@@ -33,15 +31,15 @@ public class RobotContainer {
   }
 
   public RobotContainer() {
-    // towerSubsystem = new TowerSubsystem(new TowerSparkMax());
-    // index = new Index();
+    towerSubsystem = new TowerSubsystem(new TowerSparkMax());
+    index = new Index();
     drivetrain = new drivetrain(); 
     configureBindings();
   }
 
   private void configureBindings() {
-    // controller.leftTrigger().whileTrue(intake());
-    // controller.rightTrigger().whileTrue(outake());
+    controller.leftTrigger().whileTrue(intake());
+    controller.rightTrigger().whileTrue(outake());
 
     this.drivetrain.setDefaultCommand(
       this.drivetrain.setVoltagesArcadeCommand(
@@ -50,13 +48,13 @@ public class RobotContainer {
   
   }
 
-  // public Command outake() {
-  //   return towerSubsystem.setVolts(TowerConstants.speed).alongWith(index.setIndexVoltageArcadeCommand(1.0));
-  // }
+  public Command outake() {
+    return towerSubsystem.setVolts(TowerConstants.speed).alongWith(index.setIndexVoltageArcadeCommand(1.0));
+  }
 
-  // public Command intake() {
-  //   return towerSubsystem.setVolts(TowerConstants.speed);
-  // }
+  public Command intake() {
+    return towerSubsystem.setVolts(TowerConstants.speed);
+  }
 
   public Command getAutonomousCommand() {
       return Commands.print("Hi Sujit"); 
