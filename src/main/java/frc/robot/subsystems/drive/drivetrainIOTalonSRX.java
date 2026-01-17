@@ -7,35 +7,38 @@ package frc.robot.subsystems.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-
 import frc.robot.Constants.DrivetrainConstants;
 
 /** Add your docs here. */
 public class drivetrainIOTalonSRX implements drivetrainIO{
-    TalonSRX leftBackTalon; 
-    TalonSRX leftFrontTalon;
-    TalonSRX rightFrontTalon;
-    TalonSRX rightBackTalon; 
- 
+   TalonSRX leftBackTalon; 
+   TalonSRX leftFrontTalon;
+   TalonSRX rightFrontTalon;
+   TalonSRX rightBackTalon;
 
    public void setVoltages(double left, double right) {
-    leftFrontTalon.set(ControlMode.PercentOutput, left);
+      leftFrontTalon.set(ControlMode.PercentOutput, left);
       rightFrontTalon.set(ControlMode.PercentOutput, right);
    }
 
    public drivetrainIOTalonSRX() {
-    leftBackTalon = new TalonSRX(DrivetrainConstants.leftBackTalonID);
-    leftFrontTalon = new TalonSRX(DrivetrainConstants.leftFrontTalonID);
-    rightBackTalon = new TalonSRX(DrivetrainConstants.rightBackTalonID); 
-    rightFrontTalon = new TalonSRX(DrivetrainConstants.rightFrontTalonID); 
+      leftBackTalon = new TalonSRX(DrivetrainConstants.leftBackTalonID);
+      leftFrontTalon = new TalonSRX(DrivetrainConstants.leftFrontTalonID);
+      rightBackTalon = new TalonSRX(DrivetrainConstants.rightBackTalonID); 
+      rightFrontTalon = new TalonSRX(DrivetrainConstants.rightFrontTalonID); 
 
-    leftBackTalon.follow(leftFrontTalon); 
-    rightBackTalon.follow(rightFrontTalon); 
+      leftBackTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
+      leftFrontTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
+      rightBackTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
+      rightFrontTalon.configPeakCurrentLimit(DrivetrainConstants.currentLimit);
 
-    leftFrontTalon.setInverted(false);
-    leftBackTalon.setInverted(false);
-    rightFrontTalon.setInverted(true);
-    rightBackTalon.setInverted(true);
+      leftBackTalon.follow(leftFrontTalon); 
+      rightBackTalon.follow(rightFrontTalon); 
+
+      leftFrontTalon.setInverted(false);
+      leftBackTalon.setInverted(false);
+      rightFrontTalon.setInverted(true);
+      rightBackTalon.setInverted(true);
    }
 
 }
